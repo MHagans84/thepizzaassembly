@@ -51,7 +51,7 @@ def create_mobile_menu_pdf():
     
     # Mobile-friendly size (narrower, taller - like a phone screen)
     page_width = 4.5 * inch
-    page_height = 9 * inch
+    page_height = 10 * inch
     
     c = canvas.Canvas(output_path, pagesize=(page_width, page_height))
     
@@ -89,7 +89,7 @@ def create_mobile_menu_pdf():
     y -= 20
     
     def draw_pizza_card(c, y, name, desc, price_14, price_16):
-        card_height = 95
+        card_height = 80
         
         # Card background
         c.setFillColor(WHITE)
@@ -97,50 +97,33 @@ def create_mobile_menu_pdf():
         
         # Item name (centered, large)
         c.setFillColor(DARK_TEXT)
-        c.setFont("Helvetica-Bold", 18)
-        c.drawCentredString(page_width / 2, y - 22, name)
+        c.setFont("Helvetica-Bold", 16)
+        c.drawCentredString(page_width / 2, y - 18, name)
         
-        # Prices side by side
-        price_y = y - 48
-        box_width = 70
-        gap = 15
-        start_x = (page_width - (box_width * 2 + gap)) / 2
-        
-        # 14" price
+        # Prices as text rows (like dough balls)
+        price_y = y - 38
+        c.setFillColor(DARK_TEXT)
+        c.setFont("Helvetica", 10)
+        c.drawString(margin + 20, price_y, '14" Personal')
         c.setFillColor(ITALIAN_GREEN)
-        c.roundRect(start_x, price_y - 18, box_width, 22, 11, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.setFont("Helvetica-Bold", 12)
-        c.drawCentredString(start_x + box_width / 2, price_y - 12, f'14" ${price_14}')
+        c.setFont("Helvetica-Bold", 11)
+        c.drawRightString(margin + content_width - 20, price_y, f'${price_14}')
         
-        # 16" price
+        price_y -= 14
+        c.setFillColor(DARK_TEXT)
+        c.setFont("Helvetica", 10)
+        c.drawString(margin + 20, price_y, '16" Best Value')
         c.setFillColor(ITALIAN_RED)
-        c.roundRect(start_x + box_width + gap, price_y - 18, box_width, 22, 11, fill=1, stroke=0)
-        c.setFillColor(WHITE)
-        c.drawCentredString(start_x + box_width + gap + box_width / 2, price_y - 12, f'16" ${price_16}')
+        c.setFont("Helvetica-Bold", 11)
+        c.drawRightString(margin + content_width - 20, price_y, f'${price_16}')
         
         # Description (centered, smaller)
         c.setFillColor(GRAY)
-        c.setFont("Helvetica", 8)
-        # Split description into lines
-        words = desc.split()
-        lines = []
-        current = []
-        for word in words:
-            current.append(word)
-            if c.stringWidth(' '.join(current), "Helvetica", 8) > content_width - 20:
-                current.pop()
-                lines.append(' '.join(current))
-                current = [word]
-        if current:
-            lines.append(' '.join(current))
+        c.setFont("Helvetica", 7)
+        desc_y = price_y - 14
+        c.drawCentredString(page_width / 2, desc_y, desc[:60] + "...")
         
-        desc_y = price_y - 32
-        for line in lines[:2]:  # Max 2 lines
-            c.drawCentredString(page_width / 2, desc_y, line)
-            desc_y -= 10
-        
-        return y - card_height - 12
+        return y - card_height - 10
     
     y = draw_pizza_card(c, y, "Margherita", 
         "San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, Pecorino Romano, fresh basil. Includes fresh dough.",
@@ -166,7 +149,7 @@ def create_mobile_menu_pdf():
     y -= 20
     
     def draw_dough_card(c, y, title, subtitle, prices, color):
-        card_height = 85
+        card_height = 75
         
         # Card background
         c.setFillColor(WHITE)
@@ -193,7 +176,7 @@ def create_mobile_menu_pdf():
             c.setFont("Helvetica-Bold", 12)
             c.drawRightString(margin + content_width - 20, py, price)
         
-        return y - card_height - 12
+        return y - card_height - 10
     
     y = draw_dough_card(c, y, "Fresh", "Use same day", 
         [('14" Personal (300g)', '$4'), ('16" Best Value (400g)', '$6')], ITALIAN_GREEN)
