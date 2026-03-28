@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pizza Assembly - Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --italian-red: #C8102E;
+            --italian-green: #008C45;
+            --cream: #F5F1E6;
+            --dark-text: #2C2C2C;
+            --gold: #D4A853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .menu-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 3px solid var(--italian-green);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--italian-red);
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        /* Italian flag divider */
+        .italian-divider {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 25px 0;
+        }
+
+        .italian-divider span {
+            width: 40px;
+            height: 6px;
+        }
+
+        .italian-divider .green { background-color: var(--italian-green); }
+        .italian-divider .white { background-color: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+        .italian-divider .red { background-color: var(--italian-red); }
+
+        /* Quality Statement */
+        .quality-statement {
+            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+            border-left: 4px solid var(--italian-red);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .quality-statement h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--italian-red);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .quality-statement p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .quality-statement ul {
+            list-style: none;
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .quality-statement li {
+            background: var(--cream);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--italian-green);
+            color: var(--italian-green);
+        }
+
+        /* Menu Sections */
+        .menu-section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--italian-red);
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--italian-green);
+            margin: 10px auto 0;
+        }
+
+        /* Menu Items */
+        .menu-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .item-prices {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .price-tag {
+            background: var(--italian-green);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .price-tag.large {
+            background: var(--italian-red);
+        }
+
+        .item-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        .item-size {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Dough Balls Section */
+        .dough-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .dough-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--italian-green);
+        }
+
+        .dough-card.frozen {
+            border-top-color: var(--gold);
+        }
+
+        .dough-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .dough-sizes {
+            margin-top: 12px;
+        }
+
+        .size-option {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.9rem;
+        }
+
+        .size-option:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 30px;
+            border-top: 3px solid var(--italian-green);
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .footer .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--italian-red);
+            font-weight: 600;
+        }
+
+        /* PDF Button */
+        .pdf-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--italian-red);
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(200, 16, 46, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .pdf-button:hover {
+            background: #a00d25;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 600px) {
+            .menu-container {
+                padding: 15px;
+            }
+
+            .logo {
+                max-width: 220px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .item-name {
+                font-size: 1.1rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+            }
+
+            .quality-statement li {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+
+            .pdf-button {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Print/PDF Styles */
+        @media print {
+            .pdf-button {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            .menu-item:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container" id="menu-content">
+        <!-- Header -->
+        <header class="header">
+            <img src="PZA Logo - HQ.png" alt="The Pizza Assembly" class="logo">
+            <p class="tagline">Authentic Neapolitan Style<br>Pizza</p>
+        </header>
+
+        <!-- Quality Statement -->
+        <div class="quality-statement">
+            <h3>Authentic Italian Style</h3>
+            <p>Every kit features the finest imported and artisanal ingredients for an authentic Neapolitan pizza experience.</p>
+            <ul>
+                <li>San Marzano Tomatoes</li>
+                <li>Fresh Mozzarella</li>
+                <li>Parmigiano Reggiano</li>
+                <li>Pecorino Romano</li>
+                <li>Fresh Basil</li>
+                <li>Premium Pepperoni</li>
+            </ul>
+        </div>
+
+        <div class="italian-divider">
+            <span class="green"></span>
+            <span class="white"></span>
+            <span class="red"></span>
+        </div>
+
+        <!-- Pizza Kits Section -->
+        <section class="menu-section">
+            <h2 class="section-title">Pizza Kits</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px; font-style: italic;">
+                Complete kits with fresh dough and all toppings — ready to stretch, top, and bake at home
+            </p>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Margherita Pizza Kit</span>
+                    <div class="item-prices">
+                        <span class="price-tag">14" — $15</span>
+                        <span class="price-tag large">16" — $20</span>
+                    </div>
+                </div>
+                <p class="item-description">
+                    The classic Neapolitan masterpiece. San Marzano tomato sauce, fresh mozzarella, 
+                    Parmigiano Reggiano, Pecorino Romano, and fresh basil. Includes fresh dough ball.
+                </p>
+                <p class="item-size">Medium (14") uses 250g dough • Large (16") uses 350g dough</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pepperoni Pizza Kit</span>
+                    <div class="item-prices">
+                        <span class="price-tag">14" — $15</span>
+                        <span class="price-tag large">16" — $20</span>
+                    </div>
+                </div>
+                <p class="item-description">
+                    A crowd favorite elevated with premium pepperoni. San Marzano tomato sauce, 
+                    fresh mozzarella, Parmigiano Reggiano, and fresh basil. Includes fresh dough ball.
+                </p>
+                <p class="item-size">Medium (14") uses 250g dough • Large (16") uses 350g dough</p>
+            </div>
+        </section>
+
+        <div class="italian-divider">
+            <span class="green"></span>
+            <span class="white"></span>
+            <span class="red"></span>
+        </div>
+
+        <!-- Dough Balls Section -->
+        <section class="menu-section">
+            <h2 class="section-title">Dough Balls</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px; font-style: italic;">
+                Premium 48-hour cold fermented dough
+            </p>
+
+            <div class="dough-options">
+                <div class="dough-card">
+                    <h4>Fresh Dough Balls</h4>
+                    <p style="font-size: 0.9rem; color: #666;">48-Hour Fermented • Use same day</p>
+                    <div class="dough-sizes">
+                        <div class="size-option">
+                            <span>250g (14" Medium)</span>
+                            <span style="font-weight: 600; color: var(--italian-green);">$5</span>
+                        </div>
+                        <div class="size-option">
+                            <span>350g (16" Large)</span>
+                            <span style="font-weight: 600; color: var(--italian-green);">$6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dough-card frozen">
+                    <h4>Frozen Dough Balls</h4>
+                    <p style="font-size: 0.9rem; color: #666;">48-Hour Fermented • Thaw overnight</p>
+                    <div class="dough-sizes">
+                        <div class="size-option">
+                            <span>250g (14" Medium)</span>
+                            <span style="font-weight: 600; color: var(--gold);">$4</span>
+                        </div>
+                        <div class="size-option">
+                            <span>350g (16" Large)</span>
+                            <span style="font-weight: 600; color: var(--gold);">$5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="italian-divider">
+            <span class="green"></span>
+            <span class="white"></span>
+            <span class="red"></span>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="brand">The Pizza Assembly</p>
+            <p>Premium Ingredients • Stretch • Top • Bake</p>
+            <p style="margin-top: 15px; font-size: 0.85rem;">
+                All pizzas are authentic Neapolitan style, crafted with love and the finest Italian ingredients.
+            </p>
+        </footer>
+    </div>
+
+    <!-- PDF Download Button -->
+    <button class="pdf-button" onclick="generatePDF()">
+        📄 Download PDF
+    </button>
+
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('menu-content');
+            const button = document.querySelector('.pdf-button');
+            
+            // Hide button during PDF generation
+            button.style.display = 'none';
+            
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'The-Pizza-Assembly-Menu.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    letterRendering: true
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                button.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

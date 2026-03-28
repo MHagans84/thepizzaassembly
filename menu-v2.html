@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Pizza Assembly - Menu</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+        <style>
+        :root {
+            --italian-red: #C8102E;
+            --italian-green: #008C45;
+            --cream: #F5F1E6;
+            --dark-text: #2C2C2C;
+            --gold: #D4A853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            line-height: 1.5;
+        }
+
+        .menu-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 25px;
+        }
+
+        /* Header - Compact */
+        .header {
+            text-align: center;
+            padding: 15px 10px 20px;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--italian-red);
+            font-size: 1.3rem;
+            margin-top: 15px;
+        }
+
+        /* Italian flag divider - smaller */
+        .divider {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .divider span {
+            width: 30px;
+            height: 4px;
+        }
+
+        .divider .g { background: var(--italian-green); }
+        .divider .w { background: #fff; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+        .divider .r { background: var(--italian-red); }
+
+        /* Section */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--italian-red);
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        /* Menu Items - Compact Cards */
+        .menu-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 22px 25px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .item-prices {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .price {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 15px;
+        }
+
+        .price.med { background: var(--italian-green); color: #fff; }
+        .price.lg { background: var(--italian-red); color: #fff; }
+
+        .item-desc {
+            font-size: 1.05rem;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        /* Dough Section - Inline */
+        .dough-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .dough-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        }
+
+        .dough-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .dough-card .subtitle {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .dough-price {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .dough-price:last-child { border-bottom: none; }
+
+        .dough-price .amt {
+            font-weight: 600;
+            color: var(--italian-green);
+        }
+
+        .dough-card.frozen .amt {
+            color: var(--gold);
+        }
+
+        /* Ingredients - Small footer */
+        .ingredients {
+            text-align: center;
+            margin-top: 30px;
+            padding: 18px;
+            font-size: 1rem;
+            color: #777;
+            border-top: 1px solid #ddd;
+        }
+
+        .ingredients span {
+            display: inline;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .footer .brand {
+            font-family: 'Playfair Display', serif;
+            color: var(--italian-red);
+            font-weight: 600;
+        }
+
+            </style>
+</head>
+<body>
+    <div class="menu-container" id="menu-content">
+        <!-- Header -->
+        <header class="header">
+            <img src="center logo.png" alt="The Pizza Assembly" class="logo">
+            <p class="tagline">Authentic Neapolitan Style<br>Pizza</p>
+        </header>
+
+        <div class="divider"><span class="g"></span><span class="w"></span><span class="r"></span></div>
+
+        <!-- Pizza Kits -->
+        <section>
+            <h2 class="section-title">Pizza Kits</h2>
+
+            <div class="menu-item">
+                <div class="item-row">
+                    <span class="item-name">Margherita</span>
+                    <div class="item-prices">
+                        <span class="price med">14" $15</span>
+                        <span class="price lg">16" $20</span>
+                    </div>
+                </div>
+                <p class="item-desc">San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, Pecorino Romano, fresh basil. Includes fresh dough.</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-row">
+                    <span class="item-name">Pepperoni</span>
+                    <div class="item-prices">
+                        <span class="price med">14" $15</span>
+                        <span class="price lg">16" $20</span>
+                    </div>
+                </div>
+                <p class="item-desc">Premium pepperoni, San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, fresh basil. Includes fresh dough.</p>
+            </div>
+        </section>
+
+        <div class="divider"><span class="g"></span><span class="w"></span><span class="r"></span></div>
+
+        <!-- Dough Balls -->
+        <section>
+            <h2 class="section-title">Dough Balls</h2>
+            <p style="text-align: center; font-size: 0.8rem; color: #888; margin-bottom: 12px;">48-hour cold fermented</p>
+
+            <div class="dough-grid">
+                <div class="dough-card">
+                    <h4>Fresh</h4>
+                    <p class="subtitle">Use same day</p>
+                    <div class="dough-price"><span>14" (250g)</span><span class="amt">$5</span></div>
+                    <div class="dough-price"><span>16" (350g)</span><span class="amt">$6</span></div>
+                </div>
+                <div class="dough-card frozen">
+                    <h4>Frozen</h4>
+                    <p class="subtitle">Thaw overnight</p>
+                    <div class="dough-price"><span>14" (250g)</span><span class="amt">$4</span></div>
+                    <div class="dough-price"><span>16" (350g)</span><span class="amt">$5</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ingredients footer -->
+        <div class="ingredients">
+            San Marzano Tomatoes • Fresh Mozzarella • Parmigiano Reggiano • Pecorino Romano • Fresh Basil
+        </div>
+
+        <div class="footer">
+            <span class="brand">The Pizza Assembly</span>
+        </div>
+    </div>
+
+    </body>
+</html>
