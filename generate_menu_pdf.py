@@ -132,11 +132,11 @@ def create_menu_pdf():
     
     y = draw_menu_item(c, y, "Margherita", 
         "San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, Pecorino Romano, fresh basil. Includes fresh dough.",
-        '14" $15', '16" $20')
+        '14" $14', '16" $16')
     
     y = draw_menu_item(c, y, "Pepperoni",
         "Premium pepperoni, San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, fresh basil. Includes fresh dough.",
-        '14" $15', '16" $20')
+        '14" $14', '16" $16')
     
     y -= 10
     
@@ -186,10 +186,10 @@ def create_menu_pdf():
             c.setFont("Helvetica", 11)
     
     draw_dough_card(c, margin, y, "Fresh", "Use same day", 
-        [('14" (250g)', '$5'), ('16" (350g)', '$6')], ITALIAN_GREEN)
+        [('14" Personal (300g)', '$4'), ('16" Best Value (400g)', '$6')], ITALIAN_GREEN)
     
     draw_dough_card(c, margin + card_w + 15, y, "Frozen", "Thaw overnight",
-        [('14" (250g)', '$4'), ('16" (350g)', '$5')], GOLD)
+        [('14" Personal (300g)', '$4'), ('16" Best Value (400g)', '$6')], GOLD)
     
     y -= card_h + 25
     
