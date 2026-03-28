@@ -23,8 +23,8 @@ Tennessee Food Freedom Act (Cottage Food) Compliance
 ### Dough Balls (48-hour cold fermented)
 | Size | Weight | Price |
 |------|--------|-------|
-| 14" Personal | 300g | $4 |
-| 16" Best Value | 400g | $6 |
+| 14" Medium | 300g | $4 |
+| 16" Large | 400g | $6 |
 
 *Same pricing for fresh and frozen*
 

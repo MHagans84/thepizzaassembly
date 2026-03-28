@@ -104,7 +104,7 @@ def create_mobile_menu_pdf():
         price_y = y - 38
         c.setFillColor(DARK_TEXT)
         c.setFont("Helvetica", 10)
-        c.drawString(margin + 20, price_y, '14" Personal')
+        c.drawString(margin + 20, price_y, '14" Medium')
         c.setFillColor(ITALIAN_GREEN)
         c.setFont("Helvetica-Bold", 11)
         c.drawRightString(margin + content_width - 20, price_y, f'${price_14}')
@@ -112,7 +112,7 @@ def create_mobile_menu_pdf():
         price_y -= 14
         c.setFillColor(DARK_TEXT)
         c.setFont("Helvetica", 10)
-        c.drawString(margin + 20, price_y, '16" Best Value')
+        c.drawString(margin + 20, price_y, '16" Large')
         c.setFillColor(ITALIAN_RED)
         c.setFont("Helvetica-Bold", 11)
         c.drawRightString(margin + content_width - 20, price_y, f'${price_16}')
@@ -179,10 +179,10 @@ def create_mobile_menu_pdf():
         return y - card_height - 10
     
     y = draw_dough_card(c, y, "Fresh", "Use same day", 
-        [('14" Personal (300g)', '$4'), ('16" Best Value (400g)', '$6')], ITALIAN_GREEN)
+        [('14" Medium (300g)', '$4'), ('16" Large (400g)', '$6')], ITALIAN_GREEN)
     
     y = draw_dough_card(c, y, "Frozen", "Thaw overnight",
-        [('14" Personal (300g)', '$4'), ('16" Best Value (400g)', '$6')], GOLD)
+        [('14" Medium (300g)', '$4'), ('16" Large (400g)', '$6')], GOLD)
     
     y -= 5
     draw_italian_divider(c, y, page_width)
