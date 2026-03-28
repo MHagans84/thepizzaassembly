@@ -77,7 +77,7 @@ def create_menu_pdf():
     # Tagline
     c.setFillColor(ITALIAN_RED)
     c.setFont("Helvetica-Oblique", 14)
-    c.drawCentredString(width / 2, y, "Authentic Neapolitan Style")
+    c.drawCentredString(width / 2, y, "Neapolitan Style")
     y -= 18
     c.drawCentredString(width / 2, y, "Pizza")
     y -= 30
