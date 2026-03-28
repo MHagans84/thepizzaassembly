@@ -140,7 +140,7 @@ def create_instruction_card():
         "Transfer stretched dough to a pizza peel or pan with semolina. Add your toppings — the semolina prevents sticking so no need to rush.")
     
     y = draw_step(c, y, "Bake It",
-        "Pizza oven: 700-900°F for 60-90 seconds. Home oven: Preheat to 500°F+ with stone/steel on bottom rack. Bake 5-7 minutes until crust is golden and cheese bubbles.")
+        "Pizza oven: 700-900°F for 60-90 seconds. Home oven: Preheat to 450°F, bottom rack. Bake 10 minutes until crust is golden and cheese bubbles.")
     
     y -= 5
     draw_italian_divider(c, y, page_width)
