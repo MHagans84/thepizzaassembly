@@ -81,19 +81,19 @@ def draw_kit_label(c, x, y, label_width, label_height, logo_path):
     c.setFillColor(GRAY)
     
     # Dough ingredients
-    c.drawString(x + 10, current_y, "Dough: Wheat Flour, Water, Salt, Yeast")
+    c.drawCentredString(center_x, current_y, "Dough: Wheat Flour, Water, Salt, Yeast")
     current_y -= 8
     
     # Sauce ingredients
-    c.drawString(x + 10, current_y, "Sauce: San Marzano Tomatoes, Olive Oil,")
+    c.drawCentredString(center_x, current_y, "Sauce: San Marzano Tomatoes,")
     current_y -= 8
-    c.drawString(x + 10, current_y, "  Garlic, Salt, Basil")
+    c.drawCentredString(center_x, current_y, "Olive Oil, Garlic, Salt, Basil")
     current_y -= 8
     
     # Cheese ingredients
-    c.drawString(x + 10, current_y, "Cheese: Mozzarella, Parmigiano Reggiano,")
+    c.drawCentredString(center_x, current_y, "Cheese: Mozzarella,")
     current_y -= 8
-    c.drawString(x + 10, current_y, "  Pecorino Romano")
+    c.drawCentredString(center_x, current_y, "Parmigiano, Pecorino Romano")
     current_y -= 10
     
     # Storage note
