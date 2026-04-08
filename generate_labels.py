@@ -112,9 +112,9 @@ def create_label_sheet():
     
     # Product variations
     products = [
-        ("Fresh Dough Ball", "300g - 14\" Medium"),
+        ("Fresh Dough Ball", "250g - 14\" Medium"),
         ("Fresh Dough Ball", "400g - 16\" Large"),
-        ("Frozen Dough Ball", "300g - 14\" Medium"),
+        ("Frozen Dough Ball", "250g - 14\" Medium"),
         ("Frozen Dough Ball", "400g - 16\" Large"),
     ]
     

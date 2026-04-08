@@ -131,7 +131,7 @@ def create_mobile_menu_pdf():
     
     y = draw_pizza_card(c, y, "Pepperoni",
         "Premium pepperoni, San Marzano tomatoes, fresh mozzarella, Parmigiano Reggiano, fresh basil. Includes fresh dough.",
-        14, 16)
+        15, 17)
     
     y -= 5
     draw_italian_divider(c, y, page_width)
@@ -179,10 +179,10 @@ def create_mobile_menu_pdf():
         return y - card_height - 10
     
     y = draw_dough_card(c, y, "Fresh", "Use same day", 
-        [('14" Medium (300g)', '$4'), ('16" Large (400g)', '$6')], ITALIAN_GREEN)
+        [('14" Medium (250g)', '$4'), ('16" Large (400g)', '$6')], ITALIAN_GREEN)
     
     y = draw_dough_card(c, y, "Frozen", "Thaw overnight",
-        [('14" Medium (300g)', '$4'), ('16" Large (400g)', '$6')], GOLD)
+        [('14" Medium (250g)', '$4'), ('16" Large (400g)', '$6')], GOLD)
     
     y -= 5
     draw_italian_divider(c, y, page_width)
