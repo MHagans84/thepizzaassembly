@@ -995,11 +995,27 @@
     </section>
 
     <!-- Contact/Order Section -->
+    <!-- ========== ORDERS TOGGLE ========== -->
+    <!-- Change to false to close orders, true to open -->
+    <script>const ORDERS_OPEN = true;</script>
+    <!-- =================================== -->
+    
     <section class="contact" id="contact">
         <h2>Order Your Kit</h2>
         <p>Order by Wednesday night for fresh kits ready for weekend pickup!</p>
         
-        <div class="order-form">
+        <!-- Orders Closed Message (hidden when orders are open) -->
+        <div id="ordersClosed" class="order-form" style="display: none; text-align: center;">
+            <div class="cutoff-notice" style="background: var(--gray); color: white;">
+                😴 Orders are currently closed
+            </div>
+            <p style="margin: 20px 0; font-size: 1.1rem;">We're taking a break this weekend. Check back soon!</p>
+            <p>Follow us on Instagram for updates on when orders reopen.</p>
+            <a href="https://www.instagram.com/thepizzaassembly/" target="_blank" class="btn btn-primary" style="margin-top: 20px;">Follow @thepizzaassembly</a>
+        </div>
+        
+        <!-- Order Form (hidden when orders are closed) -->
+        <div id="ordersOpen" class="order-form">
             <div class="cutoff-notice">
                 ⏰ Order by Wednesday 11:59 PM for weekend pickup
             </div>
@@ -1129,7 +1145,7 @@
                 
                 <button type="submit" class="btn-submit">Submit Order</button>
             </form>
-        </div>
+        </div><!-- end ordersOpen -->
         
         <div class="contact-info">
             <div class="contact-item">
@@ -1163,6 +1179,15 @@
     </footer>
 
     <script>
+        // Toggle orders open/closed
+        if (ORDERS_OPEN) {
+            document.getElementById('ordersOpen').style.display = 'block';
+            document.getElementById('ordersClosed').style.display = 'none';
+        } else {
+            document.getElementById('ordersOpen').style.display = 'none';
+            document.getElementById('ordersClosed').style.display = 'block';
+        }
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
