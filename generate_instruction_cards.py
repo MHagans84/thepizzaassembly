@@ -44,7 +44,7 @@ def draw_italian_divider(c, x, y, width):
     c.rect(start_x + bar_width * 2, y, bar_width, bar_height, fill=1, stroke=0)
 
 def draw_instruction_card(c, x, y, card_width, card_height, logo_path):
-    """Draw a single instruction card"""
+    """Draw a single instruction card - vertical layout"""
     
     # Card background
     c.setFillColor(CREAM)
@@ -56,59 +56,68 @@ def draw_instruction_card(c, x, y, card_width, card_height, logo_path):
     c.roundRect(x, y, card_width, card_height, 8, fill=0, stroke=1)
     
     center_x = x + card_width / 2
-    current_y = y + card_height - 12
+    center_y = y + card_height / 2
     
-    # Logo (small)
-    logo_size = 30
+    # Calculate total content height to center everything
+    # Logo (40) + gap (8) + title (12) + gap (10) + divider (4) + gap (10) + 
+    # steps (4 * 22) + gap (10) + divider (4) + gap (10) + pro tip (24) + social (10)
+    total_height = 230
+    start_y = center_y + total_height / 2
+    current_y = start_y
+    
+    # Logo
+    logo_size = 40
     circular_logo = create_circular_logo(logo_path, logo_size * 2)
     c.drawImage(circular_logo, center_x - logo_size/2, current_y - logo_size, 
                 width=logo_size, height=logo_size, mask='auto')
-    current_y -= logo_size + 5
+    current_y -= logo_size + 8
     
     # Title
     c.setFillColor(ITALIAN_RED)
-    c.setFont("Helvetica-Bold", 9)
+    c.setFont("Helvetica-Bold", 11)
     c.drawCentredString(center_x, current_y, "Pizza Instructions")
-    current_y -= 10
+    current_y -= 14
     
     draw_italian_divider(c, x, current_y, card_width)
-    current_y -= 10
+    current_y -= 14
     
     # Steps
     steps = [
-        ("1. Rest", "Remove dough from fridge 1-2 hrs before."),
-        ("2. Stretch", "Push from center out on semolina."),
+        ("1. Rest", "Remove dough from fridge 1-2 hrs."),
+        ("2. Stretch", "On semolina, push from center out."),
         ("3. Top", "Add sauce, cheese, toppings."),
         ("4. Bake", "450°F, bottom rack, 10 min."),
     ]
     
     for title, desc in steps:
         c.setFillColor(ITALIAN_GREEN)
-        c.setFont("Helvetica-Bold", 7)
-        c.drawString(x + 8, current_y, title)
-        current_y -= 8
+        c.setFont("Helvetica-Bold", 9)
+        c.drawCentredString(center_x, current_y, title)
+        current_y -= 11
         c.setFillColor(GRAY)
-        c.setFont("Helvetica", 6)
-        c.drawString(x + 8, current_y, desc)
-        current_y -= 10
+        c.setFont("Helvetica", 8)
+        c.drawCentredString(center_x, current_y, desc)
+        current_y -= 14
     
-    current_y += 2
+    current_y += 4
     draw_italian_divider(c, x, current_y, card_width)
-    current_y -= 10
+    current_y -= 14
     
     # Pro tip
     c.setFillColor(ITALIAN_RED)
-    c.setFont("Helvetica-Bold", 6)
+    c.setFont("Helvetica-Bold", 8)
     c.drawCentredString(center_x, current_y, "Pro Tip:")
-    current_y -= 8
-    c.setFillColor(GRAY)
-    c.setFont("Helvetica", 5.5)
-    c.drawCentredString(center_x, current_y, "Preheat pan/stone for crispy bottom!")
     current_y -= 10
+    c.setFillColor(GRAY)
+    c.setFont("Helvetica", 7)
+    c.drawCentredString(center_x, current_y, "Preheat pan/stone on bottom rack")
+    current_y -= 9
+    c.drawCentredString(center_x, current_y, "for a crispy crust!")
+    current_y -= 12
     
     # Social
     c.setFillColor(DARK_TEXT)
-    c.setFont("Helvetica", 5)
+    c.setFont("Helvetica", 7)
     c.drawCentredString(center_x, current_y, "@thepizzaassembly")
 
 def create_instruction_card_sheet():
@@ -119,19 +128,21 @@ def create_instruction_card_sheet():
     c = canvas.Canvas(output_path, pagesize=letter)
     page_width, page_height = letter
     
-    # Card dimensions (2.5" x 3.5" - same as kit labels)
-    card_width = 2.5 * inch
-    card_height = 3.5 * inch
+    # Card dimensions (4 per page - 2x2 grid)
+    card_width = 3.75 * inch
+    card_height = 5 * inch
     
-    # Margins and spacing
-    margin_x = 0.5 * inch
-    margin_y = 0.5 * inch
-    spacing_x = 0.25 * inch
-    spacing_y = 0.25 * inch
+    # Force 2x2 grid
+    cols = 2
+    rows = 2
     
-    # Calculate grid
-    cols = int((page_width - 2 * margin_x + spacing_x) / (card_width + spacing_x))
-    rows = int((page_height - 2 * margin_y + spacing_y) / (card_height + spacing_y))
+    # Calculate margins to center the grid
+    spacing_x = 0.04 * inch  # ~1mm gap
+    spacing_y = 0.04 * inch
+    total_width = card_width * 2 + spacing_x
+    total_height = card_height * 2 + spacing_y
+    margin_x = (page_width - total_width) / 2
+    margin_y = (page_height - total_height) / 2
     
     count = 0
     for row in range(rows):
