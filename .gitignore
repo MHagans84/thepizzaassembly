@@ -1,0 +1,10 @@
+# Private files - DO NOT COMMIT
+ROADMAP-PRIVATE.md
+*.private.md
+
+# OS files
+.DS_Store
+
+# Editor files
+*.swp
+*.swo
